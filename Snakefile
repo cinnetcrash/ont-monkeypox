@@ -3,7 +3,7 @@ import pandas as pd
 shell.executable("/bin/bash")
 
 
-filtlong_min_read_length = "1000"
+filtlong_min_read_length = "500"
 if config.get('filtlong_min_read_length',False):
   filtlong_min_read_length = config['filtlong_min_read_length']
 print("filtlong min. read length = " + str(filtlong_min_read_length))
@@ -36,12 +36,6 @@ def get_ont_fq(wildcards):
 		return 'fastq-ont/' + wildcards.sample + '.fastq'
 	else:
 		return glob('fastq-ont/' + wildcards.sample + '.fastq*')
-
-# use split("+")[0] here for removing the +filtlong... suffices from sample names for Illumina reads
-def get_R1_fq(wildcards):
-	return glob('fastq-illumina/' + wildcards.sample.split("+")[0] + '_R1.fastq*')
-def get_R2_fq(wildcards):
-	return glob('fastq-illumina/' + wildcards.sample.split("+")[0] + '_R2.fastq*')
 
 references, = glob_wildcards("references/{ref,[^/\\\\]+}.fa")
 

@@ -1,4 +1,4 @@
-name: ont-assembly-snake-polypolish
+name: ont-monkeypox-polypolish
 channels:
   - conda-forge
   - bioconda

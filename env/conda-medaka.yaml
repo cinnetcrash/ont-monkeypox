@@ -1,4 +1,4 @@
-name: ont-assembly-snake-medaka
+name: ont-monkeypox-medaka
 channels:
   - conda-forge
   - bioconda

@@ -1,4 +1,4 @@
-name: ont-assembly-snake-homopolish
+name: ont-monkeypox-homopolish
 channels:
   - conda-forge
   - bioconda

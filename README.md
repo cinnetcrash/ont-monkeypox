@@ -21,19 +21,15 @@ Forked from See the preprint here: [Snakemake Workflows for Long-read Bacterial 
 ## Quick start
 ```bash
 # Install
-git clone https://github.com/pmenzel/ont-assembly-snake.git
+git clone https://github.com/cinnetcrash/ont-monkeypox.git
 conda config --add channels bioconda
-conda env create -n ont-assembly-snake --file ont-assembly-snake/env/conda-main.yaml
-conda activate ont-assembly-snake
+conda env create -n ont-monkeypox --file ont-monkeypox/env/conda-main.yaml
+conda activate ont-monkeypox
 
 # Prepare ONT reads, one file per sample
 mkdir fastq-ont
 cp /path/to/my/data/my_sample/ont_reads.fastq.gz fastq-ont/mysample.fastq.gz
 
-# optionally: add Illumina paired-end reads
-mkdir fastq-illumina
-cp /path/to/my/data/my_sample/illumina_reads_R1.fastq.gz fastq-illumina/mysample_R1.fastq.gz
-cp /path/to/my/data/my_sample/illumina_reads_R2.fastq.gz fastq-illumina/mysample_R2.fastq.gz
 
 # Declare desired combination of read filtering, assembly and polishing
 mkdir assemblies
@@ -49,23 +45,23 @@ snakemake -s ont-assembly-snake/Snakefile --use-conda --cores 20
 ## Setup
 Clone repository, for example into the existing folder `/opt/software/`:
 ```
-git clone https://github.com/pmenzel/ont-assembly-snake.git /opt/software/ont-assembly-snake
+git clone https://github.com/cinnetcrash/ont-monkeypox.git /opt/software/ont-monkeypox
 ```
-Install [conda](https://docs.conda.io/en/latest/miniconda.html) and create a new environment called `ont-assembly-snake`:
+Install [conda](https://docs.conda.io/en/latest/miniconda.html) and create a new environment called `ont-monkeypox`:
 ```
 conda config --add channels bioconda
 conda env create -n ont-assembly-snake --file /opt/software/ont-assembly-snake/env/conda-main.yaml
 ```
 Activate the environment:
 ```
-conda activate ont-assembly-snake
+conda activate ont-monkeypox
 ```
 
 ## Usage
 First, prepare a folder called `fastq-ont/` containing the ONT sequencing reads as
 one `.fastq` or `.fastq.gz` file per sample, e.g. `fastq-ont/sample1.fastq.gz`.
 
-Unicycler and some polishing tools additonally use paired-end Illumina reads, which need to be placed in the folder `fastq-illumina/` using `_R[12].fastq` or `_R[12].fastq.gz` suffixes, e.g. `fastq-illumina/sample1_R1.fastq.gz` and `fastq-illumina/sample1_R2.fastq.gz`.
+
 
 Next, create a folder `assemblies` and in there, create empty folders specifying
 the desired combinations of read filtering, assembly, and polishing steps by using specific keywords for each program, see below.
@@ -79,9 +75,9 @@ NB: This also means that sample names must not contain underscores.
 
 After the keyword for the assembler follow the keywords for one ore more polishing steps, all separated by `+`.
 
-After making the desired subfolders in `assemblies/`, run the workflow, e.g. with 20 threads:
+After making the desired subfolders in `assemblies/`, run the workflow, e.g. with 12 threads:
 ```
-snakemake -s /opt/software/ont-assembly-snake/Snakefile --use-conda --cores 20
+snakemake -s /opt/software/ont-monkeypox/Snakefile --use-conda --cores 12
 ```
 
 Assemblies created in each step are contained in the files `output.fa` in each folder and symlinked as `.fa` files in the `assemblies/` folder, see the example below.

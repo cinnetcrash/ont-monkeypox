@@ -2,11 +2,11 @@
 
 
 
-A snakemake-wrapper for easily creating *de novo* monkeypox genome assemblies from Oxford Nanopore (ONT) sequencing data, and optionally Illumina data,
-using any combination of read filtering, assembly, long and short read polishing, and reference-based polishing.
+A snakemake-wrapper for easily creating *de novo* monkeypox genome assemblies from Oxford Nanopore (ONT) sequencing data,
+using read filtering, assembly, long and short read polishing, and reference-based polishing.
 
 
-Forked from See the preprint here: [Snakemake Workflows for Long-read Bacterial Genome Assembly and Evaluation, Preprints.org 2022](https://www.preprints.org/manuscript/202208.0191/v1)
+Forked from pmenzel/ont-assembly-snake, See the preprint here: [Snakemake Workflows for Long-read Bacterial Genome Assembly and Evaluation, Preprints.org 2022](https://www.preprints.org/manuscript/202208.0191/v1)
 
 
 
@@ -50,7 +50,7 @@ git clone https://github.com/cinnetcrash/ont-monkeypox.git /opt/software/ont-mon
 Install [conda](https://docs.conda.io/en/latest/miniconda.html) and create a new environment called `ont-monkeypox`:
 ```
 conda config --add channels bioconda
-conda env create -n ont-assembly-snake --file /opt/software/ont-assembly-snake/env/conda-main.yaml
+conda env create -n ont-monkeypox --file /opt/software/ont-monkeypox/env/conda-main.yaml
 ```
 Activate the environment:
 ```

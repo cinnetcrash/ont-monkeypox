@@ -184,11 +184,6 @@ sample1     r941_min_high_g330
 sample2     r941_min_high_g351
 ```
 
-### pilon
-
-**`pilon`**  
-Pilon polishes an assembly using Illumina reads, which must be located in the `fastq-illumina` folder.
-
 ### Polypolish
 
 **`polypolish`**  
@@ -213,16 +208,13 @@ Snakemake will create output files `...+proovframe/output_NAME1.fa`, `...+proovf
 When using proovframe, it must be the last keyword in the folder name.
 
 ## Example
-This example contains two samples with ONT sequencing reads and Illumina reads
-for sample 2 only.  
+This example contains one sample with ONT sequencing reads 
 
 For sample 1, the assembly should be done with flye (including the default single round of
-polishing), followed by polishing the assembly with racon (twice), medaka, and eventually homopolish, which will use the E. coli genome in the file `references/Ecoli.faa`.  
+polishing), followed by polishing the assembly with racon (twice), medaka, and eventually homopolish, which will use the Monkeypox genome in the file `references/monkeypox.faa`.  
 In another assembly, we also want to filter the ONT reads of sample 1 to only include the highest quality reads up to a total of 500Mb
 using Filtlong and apply the same assembly and polishing protocol.
 
-Sample 2 should be assembled by raven including two internal polishing rounds,
-followed by medaka and pilon polishing using the Illumina reads, and finally reference-based polishing with E. coli proteins using proovframe, which requires the file `references-protein/Ecoli.faa`.
 
 We therefore create the folders and files as follows:
 ```
@@ -230,24 +222,19 @@ We therefore create the folders and files as follows:
 ├── assemblies
 │   ├── sample1+filtlongMB500_flye+racon2+medaka+homopolish
 │   ├── sample1_flye+racon2+medaka+homopolish
-│   ├── sample2_raven2+medaka+pilon+proovframe
-├── fastq-illumina
-│   ├── sample2_R1.fastq
-│   └── sample2_R2.fastq
 ├── fastq-ont
 │   ├── sample1.fastq
-│   └── sample2.fastq
 ├── references
-│   └── Ecoli.fa
+│   └── monkeypox.fa
 └── references-protein
-    └── Ecoli.faa
+    └── monkeypox_protein.fa
 ```
 
 We also want to set the minimum read length threshold for Filtlong to 500nt and use the medaka model `r941_min_high_g351` for both samples.
 
 Therefore, we run the workflow with:
 ```
-snakemake -s /opt/software/ont-assembly-snake/Snakefile --use-conda --cores 20 --config medaka_model=r941_min_high_g351 filtlong_min_read_length=500
+snakemake -s /opt/software/ont-monkeypox/Snakefile --use-conda --cores 12 --config medaka_model=r941_min_high_g351 filtlong_min_read_length=500
 ```
 
 Snakemake will recursively handle the dependencies for each assembly,
@@ -274,25 +261,13 @@ For the above example, the folders will look like this after running the workflo
 │   ├── sample1_flye+racon2+medaka.fa -> sample1_flye+racon2+medaka/output.fa
 │   ├── sample1_flye+racon2+medaka+homopolish
 │   ├── sample1_flye+racon2+medaka+homopolishEcoli.fa -> sample1_flye+racon2+medaka+homopolish/output_Ecoli.fa
-│   ├── sample2_raven2
-│   ├── sample2_raven2.fa -> sample2_raven2/output.fa
-│   ├── sample2_raven2+medaka
-│   ├── sample2_raven2+medaka.fa -> sample2_raven2+medaka/output.fa
-│   ├── sample2_raven2+medaka+pilon
-│   ├── sample2_raven2+medaka+pilon.fa -> sample2_raven2+medaka+pilon/output.fa
-│   ├── sample2_raven2+medaka+pilon+proovframe
-│   └── sample2_raven2+medaka+pilon+proovframeEcoli.fa -> sample2_raven2+medaka+pilon+proovframe/output_Ecoli.fa
-├── fastq-illumina
-│   ├── sample2_R1.fastq
-│   └── sample2_R2.fastq
 ├── fastq-ont
 │   ├── sample1.fastq
 │   ├── sample1+filtlongMB500.fastq
-│   └── sample2.fastq
 ├── references
-│   └── Ecoli.fa
+│   └── monkeypox.fa
 └── references-protein
-    └── Ecoli.faa
+    └── monkeypox_protein.faa
 ```
 (Not shown is the content of each subfolder in `assemblies/` and some auxiliary files.)
 

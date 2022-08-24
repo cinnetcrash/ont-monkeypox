@@ -39,7 +39,7 @@ mkdir assemblies/mysample_raven2+medaka+pilon
 [...]
 
 # Run workflow
-snakemake -s ont-assembly-snake/Snakefile --use-conda --cores 20
+snakemake -s ont-monkeypox/Snakefile --use-conda --cores 20
 ```
 
 ## Setup

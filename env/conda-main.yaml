@@ -1,4 +1,4 @@
-name: ont-assembly-snake
+name: ont-monkeypox
 channels:
   - conda-forge
   - bioconda

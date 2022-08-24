@@ -1,4 +1,4 @@
-name: ont-assembly-snake-proovframe
+name: ont-monkeypox-proovframe
 channels:
   - conda-forge
   - bioconda

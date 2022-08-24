@@ -1,4 +1,4 @@
-name: ont-assembly-snake-flye
+name: ont-monkeypox-flye
 channels:
   - conda-forge
   - bioconda
